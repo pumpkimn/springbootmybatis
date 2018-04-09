@@ -15,15 +15,15 @@ public interface CarMapper {
     Car findById(Integer id);
 
     @Select("select id,name,price,create_date createDate from car")
-    @Results(
+   /* @Results(
             @Result(property = "createDate", column = "create_date")
-    )
+    )*/
     List<Car> find();
 
     @Update("update car set name=#{name},price=#{price},create_date=#{createDate} where id=#{id}")
     int modifyCar(Car car);
 
-    @Insert("insert into car(id,name,price,create_date) values (seq_car.nextval,#{name},#{price},#{createDate})")
+    @Insert("insert into car(name,price,create_date) values (#{name},#{price},#{createDate})")
     int addCar(Car car);
 
     @Delete("delete car where id=#{id}")
