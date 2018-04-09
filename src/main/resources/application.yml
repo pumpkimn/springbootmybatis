@@ -1,0 +1,21 @@
+#修改端口号
+server:
+  port: 8086
+  servlet:
+    context-path:
+
+spring:
+#缓存
+  thymeleaf:
+    cache: false
+#配置 资源国际化
+  messages:
+    basename: i18n/messages
+#配置mybatis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/employee?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+mybatis:
+  type-aliases-package: com.ssm.domain
