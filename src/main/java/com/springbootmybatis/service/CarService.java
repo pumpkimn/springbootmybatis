@@ -15,7 +15,7 @@ public class CarService {
     @Autowired
     private CarMapper carMapper;
 
-    public List<?> list(){
+    public List<Car> list(){
         return carMapper.find();
     }
 
@@ -23,6 +23,7 @@ public class CarService {
         return carMapper.findById(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public int add(Car car){
         return carMapper.addCar(car);
     }
