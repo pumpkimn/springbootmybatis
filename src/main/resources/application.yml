@@ -19,3 +19,4 @@ spring:
     password: root
 mybatis:
   type-aliases-package: com.ssm.domain
+  mapper-locations: mapper/*.xml

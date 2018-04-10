@@ -11,57 +11,52 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+// 跨域
+@CrossOrigin(origins = "http://127.0.0.1:8080", maxAge = 3600)
 @RequestMapping("/api")
 public class CarRestController {
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/cars",method = RequestMethod.GET)
-    public ResponseEntity<?> getCars(){
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    public ResponseEntity<?> getCars() {
         List<Car> cars = carService.list();
-        if (cars.isEmpty()){
-            return new ResponseEntity<>(new CustomType(400,"查询不到结果"), HttpStatus.OK);
+
+        if (cars.isEmpty()) {
+            return new ResponseEntity<>(new CustomType(400, "没有匹配的结果!"), HttpStatus.OK);
         }
+
         return new ResponseEntity<>(cars, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/car/{id}",method = RequestMethod.GET)
-    public ResponseEntity<?> getCar(@PathVariable("id")Integer id){
+    @RequestMapping(value = "/cars/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getCar(@PathVariable("id") Integer id) {
         Car car = carService.find(id);
-        if (car == null ){
-            return new ResponseEntity<>(new CustomType(400,id+"匹配不到结果"), HttpStatus.OK);
+
+        if (car == null) {
+            return new ResponseEntity<>(new CustomType(400, id + " 没有匹配的结果!"), HttpStatus.OK);
         }
+
         return new ResponseEntity<>(car, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/addcars",method = RequestMethod.POST)
-    public ResponseEntity<?> addCar(@RequestBody Car car){
-        CustomType customType = new CustomType(400,"增加失败");
+    @RequestMapping(value = "/cars", method = RequestMethod.POST)
+    public ResponseEntity<?> add(@RequestBody Car car) {
         int count = carService.add(car);
-        if (count > 0){
-            customType.setCode(200);
-            customType.setMessage("增加成功");
-        }
-        return new ResponseEntity<>(customType,HttpStatus.OK);
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/modifycars",method = RequestMethod.POST)
-    public ResponseEntity<?> modifyCar(@RequestBody Car car){
-        CustomType customType = new CustomType(400,"修改失败");
+    @RequestMapping(value = "/cars", method = RequestMethod.PUT)
+    public ResponseEntity<?> modify(@RequestBody Car car) {
         int count = carService.modify(car);
-        if (count > 0){
-            customType.setCode(200);
-            customType.setMessage("修改成功");
-        }
-        return new ResponseEntity<>(customType,HttpStatus.OK);
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/cars/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@PathVariable("id")Integer id){
+    @RequestMapping(value = "/cars/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> remove(@PathVariable("id") Integer id) {
         int count = carService.remove(id);
-        return new ResponseEntity<>(new CustomType(200,id+"删除成功"),HttpStatus.OK);
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
-
 
 
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springbootmybatis.mapper.CarMapper">
+    <resultMap id="result-car" type="com.springbootmybatis.domain.Car">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+    <select id="findByParam" resultMap="result-car">
+        SELECT id,name,price,create_date from CAR
+        <where>
+            1=1
+            <if test="name != null and name != ''">
+                and name like concat('%',concat(#{name},'%'))
+            </if>
+            <if test="price != null and price>0">
+                and price=#{price}
+            </if>
+        </where>
+    </select>
+</mapper>

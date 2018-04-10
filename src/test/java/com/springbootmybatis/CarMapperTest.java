@@ -20,4 +20,11 @@ public class CarMapperTest {
             System.out.println(car.getName());
         }
     }
+
+    @Test
+    public void findParam() {
+        for (Car car:carMapper.findByParam("马",null)){
+            System.out.println(car.getName());
+        }
+    }
 }

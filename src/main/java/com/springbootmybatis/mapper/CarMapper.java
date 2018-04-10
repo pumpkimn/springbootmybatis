@@ -28,4 +28,8 @@ public interface CarMapper {
 
     @Delete("delete car where id=#{id}")
     int removeCar(Integer id);
+
+    /* 条件查询 */
+    List<Car> findByParam(@Param("name") String name,
+                          @Param("price") Double price);
 }

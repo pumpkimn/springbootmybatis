@@ -3,6 +3,7 @@ package com.springbootmybatis.domain;
 import java.io.Serializable;
 
 public class CustomType implements Serializable{
+    private static final long serialVersionUID = 1421458228428397003L;
     private Integer code;
     private String message;
 
