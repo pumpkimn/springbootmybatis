@@ -136,12 +136,23 @@ spring.datasource.url=jdbc:mysql://127.0.0.1:3306/employee?useSSL=false&serverTi
 spring.datasource.username=root
 spring.datasource.password=root
 
-4.domain: Emp
-5.mapper: EmpMapper
-6.JUnit : EmpMapperTest
+#配置mybatis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/employee?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+#配置xml文件
+mybatis:
+  type-aliases-package: com.ssm.domain
+  mapper-locations: mapper/*.xml
 
-7.service: EmpService
-8.controller: EmpController
+4.domain: Car
+5.mapper: CarMapper
+6.JUnit : CarMapperTest
+
+7.service: CarService
+8.controller: CarRestController
 9.postman 测试所有的 api 接口
 
 10.前端服务器
